@@ -10,7 +10,7 @@ let server;
 
 before(async () => {
   const env = { ...process.env, PORT: String(PORT), SUPABASE_URL: "", SUPABASE_ANON_KEY: "", NODE_ENV: "production" };
-  server = spawn("node_modules/.bin/next", ["start", "-p", String(PORT)], { env, stdio: "ignore" });
+  server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "-p", String(PORT)], { env, stdio: "ignore" });
   for (let i = 0; i < 60; i += 1) {
     try {
       if ((await fetch(`${BASE}/api/health`)).ok) return;
