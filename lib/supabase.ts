@@ -18,9 +18,15 @@ export type AuthSession = {
 
 /** Error de Supabase. `userFacing` indica que el mensaje es nuestro (SQLSTATE PTxxx) y puede mostrarse. */
 export class SupabaseError extends Error {
-  constructor(message: string, readonly status: number, readonly code: string | null, readonly userFacing: boolean) {
+  readonly status: number;
+  readonly code: string | null;
+  readonly userFacing: boolean;
+  constructor(message: string, status: number, code: string | null, userFacing: boolean) {
     super(message);
     this.name = "SupabaseError";
+    this.status = status;
+    this.code = code;
+    this.userFacing = userFacing;
   }
 }
 
@@ -28,8 +34,13 @@ export function isSupabaseConfigured() {
   return Boolean(process.env.SUPABASE_URL?.trim() && process.env.SUPABASE_ANON_KEY?.trim());
 }
 
+/** Acepta la URL del proyecto aunque se pegue con /rest/v1 o /auth/v1 al final. */
+export function normalizeSupabaseUrl(value: string | undefined) {
+  return value?.trim().replace(/\/+$/, "").replace(/\/(rest|auth)\/v1$/, "") || "";
+}
+
 function config() {
-  const url = process.env.SUPABASE_URL?.trim().replace(/\/$/, "");
+  const url = normalizeSupabaseUrl(process.env.SUPABASE_URL);
   const anonKey = process.env.SUPABASE_ANON_KEY?.trim();
   if (!url || !anonKey) throw new SupabaseError("Supabase no está configurado.", 503, "not_configured", false);
   return { url, anonKey };

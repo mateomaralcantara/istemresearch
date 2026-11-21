@@ -58,3 +58,11 @@ test("menú: 18 módulos, slugs únicos y estado honesto", () => {
   for (const m of MODULES.filter((x) => x.status === "disponible")) assert.equal(m.phase, 1, m.slug);
   assert.equal(MODULES.find((m) => m.slug === "fuentes").status, "planificado");
 });
+
+test("normaliza SUPABASE_URL pegada con /rest/v1 o /auth/v1", async () => {
+  const { normalizeSupabaseUrl } = await import("../../lib/supabase.ts");
+  assert.equal(normalizeSupabaseUrl("https://abc.supabase.co/rest/v1/"), "https://abc.supabase.co");
+  assert.equal(normalizeSupabaseUrl(" https://abc.supabase.co/auth/v1 "), "https://abc.supabase.co");
+  assert.equal(normalizeSupabaseUrl("https://abc.supabase.co"), "https://abc.supabase.co");
+  assert.equal(normalizeSupabaseUrl(undefined), "");
+});

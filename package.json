@@ -16,7 +16,8 @@
     "test": "node --test tests/unit/*.test.mjs tests/e2e/*.test.mjs",
     "test:db": "bash tests/db/run.sh",
     "test:api": "node --test tests/api/*.test.mjs",
-    "validate": "npm run typecheck && npm run lint && npm run test && npm run build && npm run test:api"
+    "validate": "npm run typecheck && npm run lint && npm run test && npm run build && npm run test:api",
+    "check:supabase": "node scripts/check-supabase.mjs"
   },
   "dependencies": {
     "next": "16.4.6",

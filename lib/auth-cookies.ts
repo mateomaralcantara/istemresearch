@@ -29,7 +29,7 @@ export function clearSessionCookies(response: CookieWriter) {
 }
 
 export async function refreshSession(refreshToken: string): Promise<SessionTokens | null> {
-  const url = process.env.SUPABASE_URL?.trim().replace(/\/$/, "");
+  const url = process.env.SUPABASE_URL?.trim().replace(/\/+$/, "").replace(/\/(rest|auth)\/v1$/, "");
   const anonKey = process.env.SUPABASE_ANON_KEY?.trim();
   if (!url || !anonKey || !refreshToken) return null;
   try {
