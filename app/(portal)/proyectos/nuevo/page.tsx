@@ -15,6 +15,7 @@ export default async function NewProjectPage() {
     <>
       <PageHeader
         eyebrow="Centro de investigaciones"
+        icon="flask"
         title="Nuevo proyecto"
         description="Asistente guiado por objetivos: pregunta, población, métodos y diseño muestral. Podrás ajustarlo mientras esté en borrador o diseño."
       />

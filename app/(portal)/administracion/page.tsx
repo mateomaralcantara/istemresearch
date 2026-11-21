@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AuditVerify } from "@/components/AuditVerify";
 import { MembersManager } from "@/components/MembersManager";
+import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { listAudit, listMembers, listRoles } from "@/lib/data";
 import { requireOrganization } from "@/lib/session";
@@ -33,10 +34,10 @@ export default async function AdminPage() {
 
   return (
     <>
-      <PageHeader eyebrow={active.organization.name} title="Administración" description="Miembros, roles y registro de auditoría de la organización." />
+      <PageHeader eyebrow={active.organization.name} icon="shield" title="Administración" description="Miembros, roles y registro de auditoría de la organización." />
       {members ? (
         <section className="card">
-          <div className="card-head"><h2>Miembros</h2><p>Los permisos se aplican en la base de datos (RLS), no solo en la interfaz.</p></div>
+          <div className="card-head"><h2><span className="card-title-icon"><Icon name="users" size={16} /></span>Miembros</h2><p>Los permisos se aplican en la base de datos (RLS), no solo en la interfaz.</p></div>
           <MembersManager
             orgId={orgId}
             canManage={perms.includes("members.manage")}
@@ -49,7 +50,7 @@ export default async function AdminPage() {
       )}
 
       <section className="card">
-        <div className="card-head"><h2>Roles y permisos</h2></div>
+        <div className="card-head"><h2><span className="card-title-icon"><Icon name="lock" size={16} /></span>Roles y permisos</h2></div>
         <div className="table-wrap">
           <table>
             <thead><tr><th>Rol</th><th>Descripción</th></tr></thead>
@@ -60,7 +61,7 @@ export default async function AdminPage() {
 
       {audit ? (
         <section className="card">
-          <div className="card-head"><h2>Auditoría</h2><AuditVerify orgId={orgId} /></div>
+          <div className="card-head"><h2><span className="card-title-icon"><Icon name="fingerprint" size={16} /></span>Auditoría</h2><AuditVerify orgId={orgId} /></div>
           <div className="table-wrap">
             <table>
               <thead><tr><th>#</th><th>Fecha</th><th>Actor</th><th>Acción</th><th>Detalle</th><th>Huella</th></tr></thead>

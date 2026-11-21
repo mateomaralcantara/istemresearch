@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { getSubscription, listRoles } from "@/lib/data";
 import { requireOrganization } from "@/lib/session";
@@ -16,10 +17,10 @@ export default async function SettingsPage() {
   const roleName = roles.find((r) => r.code === active.role_code)?.name ?? active.role_code;
   return (
     <>
-      <PageHeader title="Configuración" description="Tu cuenta, la organización activa y su suscripción." />
+      <PageHeader eyebrow="Cuenta y organización" icon="gear" title="Configuración" description="Tu cuenta, la organización activa y su suscripción." />
       <div className="grid cols-2">
         <section className="card">
-          <h2>Tu cuenta</h2>
+          <div className="card-head"><h2><span className="card-title-icon"><Icon name="users" size={16} /></span>Tu cuenta</h2></div>
           <dl className="dl">
             <dt>Correo</dt><dd>{user.email}</dd>
             <dt>Correo confirmado</dt><dd>{user.email_confirmed_at ? "Sí" : "No"}</dd>
@@ -29,7 +30,7 @@ export default async function SettingsPage() {
           <div className="alert info"><strong>Autenticación multifactor</strong>Prevista para la fase 7 mediante Supabase Auth MFA (TOTP). Mientras tanto, use una contraseña única y larga.</div>
         </section>
         <section className="card">
-          <h2>Organización</h2>
+          <div className="card-head"><h2><span className="card-title-icon"><Icon name="home" size={16} /></span>Organización</h2></div>
           <dl className="dl">
             <dt>Nombre</dt><dd>{active.organization.name}</dd>
             <dt>Identificador</dt><dd className="mono">{active.organization.slug}</dd>

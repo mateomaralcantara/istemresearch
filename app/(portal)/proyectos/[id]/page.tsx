@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/PageHeader";
 import { ProjectStatusControl } from "@/components/ProjectStatusControl";
 import { ProjectTeam } from "@/components/ProjectTeam";
-import { StatusBadge } from "@/components/StatusBadge";
+import { Icon } from "@/components/Icon";
+import { StageTrack, StatusBadge } from "@/components/StatusBadge";
 import { Warnings } from "@/components/Warnings";
 import { getProject, listAudit, listGeoAreas, listMembers, listProjectMembers } from "@/lib/data";
 import { assessInference, marginOfError, type SamplingDesign } from "@/lib/methodology";
@@ -55,12 +56,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
       <PageHeader
         eyebrow={`${project.code} · versión ${project.version}`}
         title={project.title}
+        icon="flask"
         description={<StatusBadge status={project.status} />}
-        actions={editable ? <Link className="btn" href={`/proyectos/${project.id}/editar`}>Editar</Link> : null}
+        actions={editable ? <Link className="btn" href={`/proyectos/${project.id}/editar`}><Icon name="file" size={16} /> Editar</Link> : null}
       />
+      <section className="card" style={{ marginBottom: "1.1rem" }}>
+        <div className="card-head" style={{ marginBottom: ".4rem" }}><h2><span className="card-title-icon"><Icon name="activity" size={16} /></span>Ciclo de vida</h2></div>
+        <StageTrack status={project.status} />
+        {["en_pausa", "archivado"].includes(project.status) ? <p className="small muted" style={{ margin: ".5rem 0 0" }}>El proyecto está {project.status === "en_pausa" ? "en pausa" : "archivado"}.</p> : null}
+      </section>
       <div className="grid cols-2">
         <section className="card">
-          <h2>Diseño de la investigación</h2>
+          <div className="card-head"><h2><span className="card-title-icon"><Icon name="target" size={16} /></span>Diseño de la investigación</h2></div>
           <dl className="dl">
             <dt>Pregunta</dt><dd>{project.research_question}</dd>
             <dt>Objetivo</dt><dd>{OBJECTIVE_TYPES[project.objective_type as keyof typeof OBJECTIVE_TYPES] ?? project.objective_type}</dd>
@@ -74,7 +81,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </dl>
         </section>
         <section className="card">
-          <h2>Muestreo e incertidumbre</h2>
+          <div className="card-head"><h2><span className="card-title-icon"><Icon name="sigma" size={16} /></span>Muestreo e incertidumbre</h2></div>
           <dl className="dl">
             <dt>Diseño muestral</dt><dd>{SAMPLING_DESIGNS[design] ?? design}</dd>
             <dt>Muestra prevista</dt><dd>{project.planned_sample_size?.toLocaleString("es-DO") ?? "—"}</dd>
@@ -94,7 +101,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
 
       <div className="grid cols-2" style={{ marginTop: "1rem" }}>
         <section className="card">
-          <h2>Equipo del proyecto</h2>
+          <div className="card-head"><h2><span className="card-title-icon"><Icon name="users" size={16} /></span>Equipo del proyecto</h2></div>
           <ProjectTeam
             projectId={project.id}
             assigned={assigned.map((a) => ({ ...person(a.user_id), role: a.role }))}
@@ -103,14 +110,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           />
         </section>
         <section className="card">
-          <h2>Estado</h2>
+          <div className="card-head"><h2><span className="card-title-icon"><Icon name="arrow" size={16} /></span>Cambiar estado</h2></div>
           <ProjectStatusControl projectId={project.id} status={project.status} canEdit={perms.includes("project.edit")} canArchive={perms.includes("project.archive")} />
         </section>
       </div>
 
       {audit ? (
         <section className="card" style={{ marginTop: "1rem" }}>
-          <div className="card-head"><h2>Trazabilidad</h2><p>Registro de auditoría de este proyecto (encadenado).</p></div>
+          <div className="card-head"><h2><span className="card-title-icon"><Icon name="fingerprint" size={16} /></span>Trazabilidad</h2><p>Registro de auditoría de este proyecto (encadenado).</p></div>
           <div className="table-wrap">
             <table>
               <thead><tr><th>Fecha</th><th>Acción</th><th>Detalle</th><th>Huella</th></tr></thead>

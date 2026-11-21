@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { MODULES, PHASES, moduleBySlug } from "@/lib/modules";
 import { requirePortalSession } from "@/lib/session";
@@ -22,10 +23,10 @@ export default async function ComingSoonPage({ params }: { params: Promise<{ slu
   if (!mod || !mod.href.startsWith("/modulos/")) notFound();
   return (
     <>
-      <PageHeader eyebrow={mod.engine ?? "Módulo"} title={mod.label} description={mod.summary} />
+      <PageHeader eyebrow={mod.engine ?? "Módulo"} icon={mod.icon} title={mod.label} description={mod.summary} />
       <section className="card" style={{ maxWidth: 760 }}>
         <div className="card-head">
-          <h2>Planificado para la fase {mod.phase}: {PHASES[mod.phase]}</h2>
+          <h2><span className="card-title-icon"><Icon name="clock" size={16} /></span>Planificado para la fase {mod.phase}: {PHASES[mod.phase]}</h2>
           <span className={`badge ${mod.status === "parcial" ? "info" : "neutral"}`}>{mod.status === "parcial" ? "Disponible en parte" : "No disponible aún"}</span>
         </div>
         <p>

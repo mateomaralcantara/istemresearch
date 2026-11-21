@@ -11,9 +11,11 @@ export const dynamic = "force-dynamic";
 export default function Page() {
   return (
     <div className="public">
+      <div className="public-bg" aria-hidden="true" />
       <header><Brand /></header>
       <main className="auth-wrap">
         <h1>Recuperar acceso</h1>
+        <p className="sub">Te enviaremos un enlace para restablecer tu contraseña.</p>
         {!isSupabaseConfigured() ? (
           <div className="alert advertencia" role="alert">
             <strong>Servicio no configurado</strong>

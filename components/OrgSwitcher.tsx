@@ -6,13 +6,19 @@ import { send } from "@/lib/client-api";
 
 type Option = { id: string; name: string };
 
+function initials(name: string) {
+  return name.replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map((w) => w[0]?.toUpperCase() ?? "").join("") || "O";
+}
+
 export function OrgSwitcher({ options, activeId }: { options: Option[]; activeId: string | null }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   if (options.length === 0) return null;
+  const active = options.find((o) => o.id === activeId) ?? options[0];
   return (
-    <label className="small" style={{ display: "flex", gap: ".4rem", alignItems: "center" }}>
-      <span className="muted">Organización</span>
+    <label className="org-switch">
+      <span className="org-dot" aria-hidden="true">{initials(active.name)}</span>
+      <span className="sr-only">Organización activa</span>
       <select
         value={activeId ?? ""}
         disabled={busy}
@@ -23,7 +29,6 @@ export function OrgSwitcher({ options, activeId }: { options: Option[]; activeId
           setBusy(false);
           router.refresh();
         }}
-        style={{ width: "auto", maxWidth: 240 }}
       >
         {options.map((o) => (
           <option key={o.id} value={o.id}>{o.name}</option>

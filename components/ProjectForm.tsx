@@ -146,7 +146,7 @@ export function ProjectForm({
         {STEPS.map((label, i) => (
           <li key={label} aria-current={i === step ? "step" : undefined} className={i < step ? "done" : undefined}>
             <button type="button" className="btn link" style={{ color: "inherit" }} onClick={() => setStep(i)}>
-              {i + 1}. {label}
+              <span className="n">{i < step ? "✓" : i + 1}</span>{label}
             </button>
           </li>
         ))}

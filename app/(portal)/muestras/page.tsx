@@ -9,6 +9,7 @@ export default function SamplesPage() {
     <>
       <PageHeader
         eyebrow="Participantes y muestras · simulador"
+        icon="users"
         title="Simulador de diseño muestral"
         description="Calcule tamaño de muestra, margen alcanzable, asignación por estratos y duración del campo. Para diseños no probabilísticos el simulador no calcula margen de error: lo indica explícitamente."
       />

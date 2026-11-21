@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { simulate, type SimulationInput } from "@/lib/simulator";
 import { SAMPLING_DESIGNS } from "@/lib/project-rules";
+import { Icon } from "./Icon";
 import { Warnings } from "./Warnings";
 
 function parseStrata(text: string): { strata: Record<string, number> | null; error: string | null } {
@@ -131,7 +132,7 @@ export function SimulatorForm() {
       </form>
 
       <section className="card" aria-live="polite" aria-label="Resultado">
-        <h2>Resultado</h2>
+        <div className="card-head"><h2><span className="card-title-icon"><Icon name="bars" size={16} /></span>Resultado</h2></div>
         {outcome.error ? <div className="alert error">{outcome.error}</div> : null}
         {r ? (
           <>
