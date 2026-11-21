@@ -62,3 +62,8 @@ database/migrations/ 001 fundamentos (RLS, RPC, auditoría) · 002 geografía RD
 tests/               unit · e2e (estructura) · api (HTTP) · db (SQL)
 docs/                entregables de planificación
 ```
+
+## Ver cómo quedará todo
+- **Maqueta de los 18 módulos** (datos ficticios): abre `docs/prototipos/index.html` en el navegador.
+- **Datos de demostración en tu Supabase:** ejecuta `database/seeds/demo_ficticio.sql` en el SQL Editor (crea «Instituto Demo (datos ficticios)» con 7 proyectos en todas las etapas).
+- **Verificar la conexión:** `npm run check:supabase`.

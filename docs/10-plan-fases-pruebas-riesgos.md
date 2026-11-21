@@ -4,6 +4,8 @@
 
 Las pantallas de la fase 1 están **implementadas** (no son maquetas): inicio (`/inicio`), centro de investigaciones (`/proyectos`), asistente de proyecto en 5 pasos (`/proyectos/nuevo`), ficha de proyecto con equipo, estado y trazabilidad (`/proyectos/[id]`), simulador muestral (`/muestras`), administración con verificación de auditoría (`/administracion`), configuración (`/configuracion`) y los 18 elementos del menú. Los módulos de fases posteriores muestran su fase y alcance, sin datos de ejemplo.
 
+**Maqueta navegable de todos los módulos:** `docs/prototipos/index.html` (ábrela en el navegador; datos ficticios).
+
 Prototipos de fases siguientes (a diseñar al iniciar cada fase, con validación de usuarios): editor de cuestionarios por bloques con vista previa móvil; PWA de campo; explorador de conversaciones con contadores separados (comentarios / autores observables / publicaciones / interacciones); ficha y comparador de Poll of Polls; editor de dashboards por bloques; Laboratorio de evidencias; consola del HARNESS (tareas, presupuestos, aprobaciones, botón de parada).
 
 ## B. Plan de pruebas

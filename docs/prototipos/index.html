@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prototipos ISTEM</title>
+<!-- Maqueta navegable de todos los módulos. DATOS FICTICIOS. Entregable 13 (prototipos de interfaz). -->
+<style>/* ISTEM RESEARCH · sistema visual
+   Corporativo y científico: azul profundo + turquesa, superficies limpias, profundidad suave. */
+:root {
+  --bg: #f3f5fa;
+  --surface: #ffffff;
+  --surface-2: #f7f9fc;
+  --surface-3: #eef2f8;
+  --text: #0c1830;
+  --text-2: #33425c;
+  --muted: #64748b;
+  --line: #e3e8f0;
+  --line-2: #d3dbe7;
+  --brand: #1d4ed8;
+  --brand-2: #0ea5a4;
+  --brand-3: #6d5dfc;
+  --brand-soft: #eaf0ff;
+  --grad: linear-gradient(135deg, #1d4ed8 0%, #2563eb 40%, #0ea5a4 100%);
+  --ok: #059669;   --ok-soft: #e6f7f0;
+  --warn: #b45309; --warn-soft: #fff4e0;
+  --bad: #dc2626;  --bad-soft: #fdecec;
+  --info: #4f46e5; --info-soft: #eef0ff;
+  --c-blue: #2563eb; --c-blue-soft: #e8efff;
+  --c-teal: #0d9488; --c-teal-soft: #e2f6f3;
+  --c-violet: #7c3aed; --c-violet-soft: #f1eaff;
+  --c-amber: #d97706; --c-amber-soft: #fff3dc;
+  --c-rose: #e11d48; --c-rose-soft: #ffe9ee;
+  --side-bg: #0a1530;
+  --side-bg-2: #0e1f45;
+  --side-text: #c5d0e6;
+  --side-muted: #7f8db0;
+  --side-active: rgba(96, 165, 250, .16);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 1px 2px rgba(12, 24, 48, .05);
+  --shadow: 0 1px 2px rgba(12, 24, 48, .04), 0 8px 24px -6px rgba(12, 24, 48, .08);
+  --shadow-lg: 0 20px 50px -12px rgba(12, 24, 48, .22);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #070d1c;
+    --surface: #0e1729;
+    --surface-2: #111c31;
+    --surface-3: #16233c;
+    --text: #e8eefa;
+    --text-2: #c2cde2;
+    --muted: #8b9ab6;
+    --line: #1d2a44;
+    --line-2: #283a5c;
+    --brand: #60a5fa;
+    --brand-2: #2dd4bf;
+    --brand-3: #a78bfa;
+    --brand-soft: #12244a;
+    --ok: #34d399;   --ok-soft: #0c2a22;
+    --warn: #fbbf24; --warn-soft: #2b2110;
+    --bad: #f87171;  --bad-soft: #321417;
+    --info: #a5b4fc; --info-soft: #1a1d40;
+    --c-blue: #60a5fa; --c-blue-soft: #132650;
+    --c-teal: #2dd4bf; --c-teal-soft: #0c2c2c;
+    --c-violet: #a78bfa; --c-violet-soft: #23183f;
+    --c-amber: #fbbf24; --c-amber-soft: #2c2310;
+    --c-rose: #fb7185; --c-rose-soft: #331520;
+    --side-bg: #050a16;
+    --side-bg-2: #0a1430;
+    --shadow: 0 1px 0 rgba(255, 255, 255, .02) inset, 0 10px 30px -10px rgba(0, 0, 0, .6);
+    --shadow-lg: 0 24px 60px -12px rgba(0, 0, 0, .7);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv11", "ss01";
+}
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+button, input, select, textarea { font: inherit; color: inherit; }
+h1, h2, h3 { line-height: 1.2; letter-spacing: -.02em; margin: 0 0 .5rem; color: var(--text); }
+h1 { font-size: 1.75rem; font-weight: 750; }
+h2 { font-size: 1.08rem; font-weight: 700; }
+h3 { font-size: .98rem; font-weight: 700; }
+p { margin: 0 0 .75rem; }
+code, .mono { font-family: ui-monospace, SFMono-Regular, "Cascadia Code", Menlo, monospace; font-size: .84em; }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 6px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+::selection { background: color-mix(in srgb, var(--brand) 25%, transparent); }
+
+/* ---------- Marca ---------- */
+.brand { display: flex; align-items: center; gap: .7rem; font-weight: 800; letter-spacing: .04em; color: var(--text); font-size: .95rem; }
+.brand:hover { text-decoration: none; }
+.brand-mark { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; color: #fff; background: var(--grad); box-shadow: 0 6px 18px -4px rgba(37, 99, 235, .55), inset 0 1px 0 rgba(255,255,255,.25); flex: none; }
+.brand small { display: block; font-weight: 500; color: var(--muted); font-size: .7rem; letter-spacing: .02em; margin-top: 1px; }
+.sidebar .brand { color: #fff; }
+.sidebar .brand small { color: var(--side-muted); }
+
+/* ---------- Estructura del portal ---------- */
+.app { display: grid; grid-template-columns: 272px minmax(0, 1fr); min-height: 100vh; }
+.sidebar {
+  background: radial-gradient(120% 60% at 0% 0%, rgba(37, 99, 235, .28), transparent 60%),
+              radial-gradient(90% 50% at 100% 100%, rgba(14, 165, 164, .18), transparent 60%),
+              linear-gradient(180deg, var(--side-bg-2), var(--side-bg));
+  color: var(--side-text);
+  padding: 1.1rem .85rem 1rem;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 1rem;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+.sidebar .brand { padding: .2rem .45rem .4rem; }
+.nav-group { margin-bottom: .55rem; }
+.nav-group-title { font-size: .66rem; text-transform: uppercase; letter-spacing: .14em; color: var(--side-muted); padding: .35rem .7rem .3rem; font-weight: 700; }
+.nav { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
+.nav a { display: flex; align-items: center; gap: .7rem; padding: .48rem .7rem; border-radius: 10px; color: var(--side-text); font-size: .885rem; position: relative; transition: background .15s, color .15s; }
+.nav a svg { color: var(--side-muted); transition: color .15s; flex: none; }
+.nav a:hover { background: rgba(255, 255, 255, .06); color: #fff; text-decoration: none; }
+.nav a:hover svg { color: #fff; }
+.nav a[aria-current="page"] { background: var(--side-active); color: #fff; font-weight: 650; }
+.nav a[aria-current="page"]::before { content: ""; position: absolute; left: -.85rem; top: 22%; bottom: 22%; width: 3px; border-radius: 0 3px 3px 0; background: linear-gradient(#60a5fa, #2dd4bf); }
+.nav a[aria-current="page"] svg { color: #7cc4ff; }
+.nav .label { flex: 1; min-width: 0; }
+.nav .phase { font-size: .62rem; color: var(--side-muted); border: 1px solid rgba(255, 255, 255, .12); border-radius: 999px; padding: 0 .45rem; white-space: nowrap; font-weight: 600; }
+.nav .phase.partial { color: #7dd3c0; border-color: rgba(45, 212, 191, .35); }
+.side-foot { margin-top: auto; padding: .85rem; border-radius: 14px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .08); font-size: .78rem; color: var(--side-muted); }
+.side-foot strong { color: #fff; display: block; font-size: .82rem; margin-bottom: .2rem; }
+.side-foot .bar { height: 6px; border-radius: 99px; background: rgba(255, 255, 255, .1); margin-top: .6rem; overflow: hidden; }
+.side-foot .bar span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #60a5fa, #2dd4bf); }
+
+.nav-mobile { display: none; }
+.main { min-width: 0; display: flex; flex-direction: column; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .7rem 1.75rem; border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  position: sticky; top: 0; z-index: 15; flex-wrap: wrap;
+}
+.topbar-left, .topbar-right { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.org-switch { display: flex; align-items: center; gap: .55rem; padding: .25rem .3rem .25rem .6rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm); }
+.org-switch .org-dot { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-size: .72rem; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--c-violet), var(--c-blue)); }
+.org-switch select { border: 0; background: transparent; padding: .3rem 1.4rem .3rem .1rem; font-weight: 650; font-size: .88rem; max-width: 260px; cursor: pointer; }
+.org-switch select:focus { outline: none; }
+.user-chip { display: flex; align-items: center; gap: .55rem; font-size: .84rem; color: var(--text-2); }
+.avatar { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 750; font-size: .8rem; color: #fff; background: linear-gradient(135deg, #0ea5a4, #2563eb); box-shadow: 0 0 0 3px var(--surface), 0 0 0 4px var(--line); }
+.user-chip .who { display: grid; line-height: 1.2; }
+.user-chip .who small { color: var(--muted); font-size: .72rem; }
+.content { padding: 1.75rem; max-width: 1240px; width: 100%; }
+
+@media (max-width: 960px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .nav-mobile { display: block; position: relative; }
+  .nav-mobile summary { cursor: pointer; display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 10px; list-style: none; background: var(--surface); }
+  .nav-mobile summary::-webkit-details-marker { display: none; }
+  .nav-mobile[open] .mobile-panel { position: fixed; left: 16px; right: 16px; top: 64px; background: linear-gradient(180deg, var(--side-bg-2), var(--side-bg)); border-radius: var(--radius); padding: .75rem; z-index: 30; box-shadow: var(--shadow-lg); max-height: calc(100vh - 90px); overflow: auto; }
+  .topbar { padding: .65rem 16px; }
+  .content { padding: 1.1rem 16px 2rem; }
+  .user-chip .who { display: none; }
+  .topbar-right .btn span { display: none; }
+  .org-switch select { max-width: 170px; }
+  .pitem { grid-template-columns: auto minmax(0, 1fr); }
+  .pitem > .badge { grid-column: 2; justify-self: start; }
+  .p-meta { flex-wrap: wrap; }
+  .hero-band { padding: 1.4rem 1.25rem; }
+}
+
+/* ---------- Encabezados ---------- */
+.page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.page-head p { color: var(--muted); margin: .15rem 0 0; max-width: 72ch; }
+.eyebrow { display: inline-flex; align-items: center; gap: .4rem; font-size: .7rem; text-transform: uppercase; letter-spacing: .14em; color: var(--brand-2); font-weight: 750; margin-bottom: .4rem; }
+
+.hero-band {
+  position: relative; overflow: hidden; border-radius: 22px; padding: 1.8rem 2rem; margin-bottom: 1.5rem; color: #fff;
+  background:
+    radial-gradient(60% 120% at 100% 0%, rgba(45, 212, 191, .55), transparent 60%),
+    radial-gradient(50% 90% at 0% 100%, rgba(124, 58, 237, .45), transparent 60%),
+    linear-gradient(120deg, #0b1f4d, #1d4ed8 60%, #0f766e);
+  box-shadow: var(--shadow-lg);
+}
+.hero-band::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px); background-size: 18px 18px; mask-image: linear-gradient(90deg, transparent 30%, #000); pointer-events: none; }
+.hero-band > * { position: relative; z-index: 1; }
+.hero-band h1 { color: #fff; font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: .35rem; }
+.hero-band p { color: rgba(255, 255, 255, .82); max-width: 60ch; margin: 0; }
+.hero-band .eyebrow { color: #99f6e4; }
+.hero-band .hero-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.25rem; flex-wrap: wrap; }
+.hero-band .btn { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.12); color: #fff; backdrop-filter: blur(6px); }
+.hero-band .btn:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.5); }
+.hero-band .btn.primary { background: #fff; color: #0b1f4d; border-color: #fff; box-shadow: 0 8px 24px -8px rgba(0,0,0,.5); }
+.hero-chips { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
+.hero-chips span { display: inline-flex; align-items: center; gap: .35rem; font-size: .76rem; padding: .25rem .65rem; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); }
+
+/* ---------- Tarjetas ---------- */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.35rem; box-shadow: var(--shadow); }
+:not(.grid) > .card + .card { margin-top: 1.1rem; }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: .75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.card-head h2 { margin: 0; display: flex; align-items: center; gap: .55rem; }
+.card-head p { margin: 0; color: var(--muted); font-size: .84rem; }
+.card-title-icon { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand); flex: none; }
+.grid { display: grid; gap: 1.1rem; }
+.grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid.wide-left { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+@media (max-width: 1100px) { .grid.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .grid.wide-left { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 900px) { .grid.cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; } }
+.stack { display: grid; gap: 1.1rem; }
+
+/* KPI */
+.kpi { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.15rem 1rem; box-shadow: var(--shadow); overflow: hidden; transition: transform .18s ease, box-shadow .18s ease; }
+.kpi:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.kpi::after { content: ""; position: absolute; right: -30px; top: -30px; width: 110px; height: 110px; border-radius: 50%; background: var(--tone-soft); opacity: .7; }
+.kpi > * { position: relative; z-index: 1; }
+.kpi-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: .75rem; }
+.kpi-icon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: var(--tone); background: var(--tone-soft); }
+.kpi .label { color: var(--muted); font-size: .8rem; font-weight: 600; }
+.kpi .value { font-size: 2rem; font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.kpi .note { color: var(--muted); font-size: .74rem; margin-top: .25rem; }
+.kpi.unavailable { background: repeating-linear-gradient(135deg, var(--surface) 0 10px, var(--surface-2) 10px 20px); box-shadow: none; border-style: dashed; border-color: var(--line-2); }
+.kpi.unavailable:hover { transform: none; box-shadow: none; }
+.kpi.unavailable::after { display: none; }
+.kpi.unavailable .value { font-size: .95rem; font-weight: 650; color: var(--muted); padding: .35rem 0 .1rem; }
+.kpi.unavailable .kpi-icon { background: var(--surface-3); color: var(--muted); }
+.tone-blue { --tone: var(--c-blue); --tone-soft: var(--c-blue-soft); }
+.tone-teal { --tone: var(--c-teal); --tone-soft: var(--c-teal-soft); }
+.tone-violet { --tone: var(--c-violet); --tone-soft: var(--c-violet-soft); }
+.tone-amber { --tone: var(--c-amber); --tone-soft: var(--c-amber-soft); }
+.tone-rose { --tone: var(--c-rose); --tone-soft: var(--c-rose-soft); }
+.section-label { display: flex; align-items: center; gap: .6rem; margin: 1.6rem 0 .8rem; font-size: .72rem; font-weight: 750; text-transform: uppercase; letter-spacing: .13em; color: var(--muted); }
+.section-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+/* ---------- Insignias ---------- */
+.badge { display: inline-flex; align-items: center; gap: .38rem; padding: .16rem .62rem; border-radius: 999px; font-size: .73rem; font-weight: 650; border: 1px solid transparent; white-space: nowrap; line-height: 1.5; }
+.badge.dot::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.badge.neutral { background: var(--surface-3); color: var(--text-2); }
+.badge.brand { background: var(--brand-soft); color: var(--brand); }
+.badge.ok { background: var(--ok-soft); color: var(--ok); }
+.badge.warn { background: var(--warn-soft); color: var(--warn); }
+.badge.bad { background: var(--bad-soft); color: var(--bad); }
+.badge.info { background: var(--info-soft); color: var(--info); }
+.badge.violet { background: var(--c-violet-soft); color: var(--c-violet); }
+.badge.teal { background: var(--c-teal-soft); color: var(--c-teal); }
+a.badge:hover { text-decoration: none; filter: brightness(.97); }
+
+/* ---------- Avisos ---------- */
+.alert { border-radius: 12px; padding: .75rem .95rem .75rem 2.6rem; border: 1px solid; font-size: .88rem; margin: .6rem 0; position: relative; color: var(--text-2); }
+.alert::before { content: ""; position: absolute; left: .95rem; top: .95rem; width: 10px; height: 10px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 20%, transparent); }
+.alert strong { display: block; margin-bottom: .1rem; color: var(--text); }
+.alert.bloqueo, .alert.error { background: var(--bad-soft); border-color: color-mix(in srgb, var(--bad) 25%, transparent); }
+.alert.bloqueo::before, .alert.error::before { background: var(--bad); }
+.alert.advertencia { background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 25%, transparent); }
+.alert.advertencia::before { background: var(--warn); }
+.alert.info { background: var(--info-soft); border-color: color-mix(in srgb, var(--info) 22%, transparent); }
+.alert.info::before { background: var(--info); }
+.alert.success { background: var(--ok-soft); border-color: color-mix(in srgb, var(--ok) 25%, transparent); }
+.alert.success::before { background: var(--ok); }
+
+/* ---------- Botones ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; padding: .55rem 1rem; border-radius: 11px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font-weight: 650; cursor: pointer; font-size: .88rem; transition: transform .12s, box-shadow .15s, border-color .15s, background .15s; box-shadow: var(--shadow-sm); white-space: nowrap; }
+.btn:hover { border-color: var(--brand); text-decoration: none; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+.btn.primary { background: var(--grad); border-color: transparent; color: #fff; box-shadow: 0 8px 20px -8px rgba(37, 99, 235, .7); }
+.btn.primary:hover { box-shadow: 0 12px 26px -8px rgba(37, 99, 235, .8); filter: brightness(1.05); }
+.btn.danger { color: var(--bad); }
+.btn.danger:hover { border-color: var(--bad); background: var(--bad-soft); }
+.btn.small { padding: .32rem .7rem; font-size: .79rem; border-radius: 9px; }
+.btn.link { border: 0; background: none; color: var(--brand); padding: 0; box-shadow: none; }
+.btn.link:hover { transform: none; text-decoration: underline; }
+.btn.ghost { background: transparent; box-shadow: none; }
+
+/* ---------- Formularios ---------- */
+.form { display: grid; gap: 1rem; }
+.form-row { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } }
+.field { display: grid; gap: .35rem; }
+.field label, .field legend { font-weight: 650; font-size: .84rem; color: var(--text-2); }
+.field .hint { color: var(--muted); font-size: .77rem; }
+.field .error { color: var(--bad); font-size: .78rem; font-weight: 600; }
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="date"], select, textarea {
+  width: 100%; padding: .6rem .75rem; border: 1px solid var(--line-2); border-radius: 10px; background: var(--surface); transition: border-color .15s, box-shadow .15s;
+}
+input:hover, select:hover, textarea:hover { border-color: color-mix(in srgb, var(--brand) 40%, var(--line-2)); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 16%, transparent); }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--brand); width: 16px; height: 16px; margin-top: .15rem; }
+textarea { min-height: 96px; resize: vertical; }
+fieldset { border: 1px solid var(--line); border-radius: 14px; padding: .9rem 1rem 1rem; margin: 0; background: var(--surface-2); }
+fieldset legend { padding: 0 .4rem; }
+.checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .45rem .9rem; }
+.checks label { display: flex; gap: .5rem; align-items: flex-start; font-size: .86rem; font-weight: 500; padding: .35rem .5rem; border-radius: 8px; cursor: pointer; color: var(--text); }
+.checks label:hover { background: var(--surface); }
+.checks label:has(input:checked) { background: var(--brand-soft); color: var(--brand); font-weight: 600; }
+.form-actions { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+
+/* Pasos del asistente */
+.steps { display: flex; gap: .4rem; flex-wrap: wrap; margin: 0 0 1.1rem; list-style: none; padding: 0; counter-reset: step; }
+.steps li { font-size: .8rem; padding: .32rem .8rem .32rem .35rem; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); background: var(--surface-2); display: flex; align-items: center; }
+.steps li .btn.link { color: inherit; font-weight: 600; font-size: .8rem; gap: .45rem; }
+.steps li .n { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-3); font-size: .72rem; font-weight: 750; }
+.steps li[aria-current="step"] { border-color: transparent; color: #fff; background: var(--grad); box-shadow: 0 6px 16px -6px rgba(37,99,235,.7); }
+.steps li[aria-current="step"] .n { background: rgba(255,255,255,.25); }
+.steps li.done { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 30%, var(--line)); background: var(--ok-soft); }
+.steps li.done .n { background: var(--ok); color: #fff; }
+
+/* ---------- Tablas ---------- */
+.table-wrap { overflow-x: auto; margin: 0 -.35rem; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: .875rem; }
+th, td { text-align: left; padding: .7rem .75rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th { color: var(--muted); font-weight: 700; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; background: var(--surface-2); }
+th:first-child { border-top-left-radius: 10px; } th:last-child { border-top-right-radius: 10px; }
+tbody tr { transition: background .12s; }
+tbody tr:hover { background: var(--surface-2); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+tr:last-child td { border-bottom: 0; }
+.row-title { font-weight: 650; color: var(--text); }
+.row-title:hover { color: var(--brand); }
+
+.empty { text-align: center; color: var(--muted); padding: 2.5rem 1rem; }
+.empty .empty-icon { width: 54px; height: 54px; margin: 0 auto .8rem; border-radius: 16px; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand); }
+.dl { display: grid; grid-template-columns: minmax(130px, 200px) 1fr; gap: .55rem 1rem; margin: 0; font-size: .9rem; }
+.dl dt { color: var(--muted); font-size: .84rem; }
+.dl dd { margin: 0; color: var(--text); }
+@media (max-width: 560px) { .dl { grid-template-columns: 1fr; gap: .1rem; } .dl dd { margin-bottom: .6rem; } }
+.muted { color: var(--muted); }
+.small { font-size: .82rem; }
+.tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+/* Etapas del proyecto */
+.stages { display: flex; align-items: center; gap: 3px; min-width: 120px; }
+.stages span { height: 6px; flex: 1; border-radius: 99px; background: var(--surface-3); }
+.stages span.on { background: var(--grad); }
+.stages.paused span.on { background: var(--c-amber); }
+.stages.archived span.on { background: var(--muted); }
+.stage-track { display: grid; grid-template-columns: repeat(6, 1fr); gap: .4rem; margin: .4rem 0 .2rem; }
+.stage-track div { text-align: center; font-size: .72rem; color: var(--muted); }
+.stage-track div::before { content: ""; display: block; height: 6px; border-radius: 99px; background: var(--surface-3); margin-bottom: .4rem; }
+.stage-track div.on { color: var(--text-2); font-weight: 650; }
+.stage-track div.on::before { background: var(--grad); }
+.stage-track div.current { color: var(--brand); }
+
+/* Línea de tiempo de fases */
+.timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 15px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--brand-2), var(--line) 20%); }
+.timeline li { position: relative; padding: .1rem 0 .95rem 2.6rem; }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline .dot { position: absolute; left: 4px; top: 1px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 2px solid var(--line-2); color: var(--muted); font-size: .68rem; font-weight: 800; }
+.timeline li.done .dot { background: var(--grad); border-color: transparent; color: #fff; box-shadow: 0 0 0 4px var(--c-teal-soft); }
+.timeline .t-title { display: flex; align-items: center; gap: .5rem; font-weight: 650; font-size: .9rem; }
+.timeline .t-sub { color: var(--muted); font-size: .78rem; }
+
+/* Lista de proyectos recientes */
+.plist { display: grid; gap: .55rem; }
+.pitem { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .85rem; align-items: center; padding: .7rem .8rem; border-radius: 12px; border: 1px solid var(--line); background: var(--surface-2); transition: border-color .15s, background .15s, transform .15s; color: inherit; }
+.pitem:hover { text-decoration: none; border-color: color-mix(in srgb, var(--brand) 40%, var(--line)); background: var(--surface); transform: translateX(2px); }
+.pitem .p-icon { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--tone-soft, var(--brand-soft)); color: var(--tone, var(--brand)); }
+.pitem .p-title { font-weight: 650; font-size: .9rem; color: var(--text); line-height: 1.3; }
+.pitem .p-meta { display: flex; align-items: center; gap: .6rem; color: var(--muted); font-size: .74rem; margin-top: .2rem; }
+
+/* ---------- Páginas públicas ---------- */
+.public { min-height: 100vh; display: flex; flex-direction: column; position: relative; overflow-x: hidden; }
+.public-bg { position: absolute; inset: 0 0 auto 0; height: 760px; z-index: 0; pointer-events: none;
+  background: radial-gradient(50% 60% at 85% 10%, rgba(14,165,164,.22), transparent 70%), radial-gradient(45% 55% at 10% 0%, rgba(37,99,235,.22), transparent 70%), radial-gradient(30% 40% at 50% 60%, rgba(124,58,237,.12), transparent 70%); }
+.public > *:not(.public-bg) { position: relative; z-index: 1; }
+.public header, .public footer { padding: 1.1rem 16px; max-width: 1160px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.public footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line); margin-top: auto; }
+.landing { max-width: 1160px; margin: 0 auto; padding: 3rem 16px 2rem; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 3rem; align-items: center; }
+@media (max-width: 900px) { .landing { grid-template-columns: 1fr; padding-top: 1.5rem; } }
+.landing h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); line-height: 1.04; letter-spacing: -.04em; margin: .6rem 0 1rem; }
+.landing h1 em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.landing .lead { font-size: 1.1rem; color: var(--muted); max-width: 56ch; }
+.pill { display: inline-flex; align-items: center; gap: .45rem; font-size: .76rem; font-weight: 650; padding: .3rem .75rem; border-radius: 999px; border: 1px solid var(--line-2); background: color-mix(in srgb, var(--surface) 80%, transparent); color: var(--text-2); }
+.pill i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px var(--ok-soft); }
+.preview { border-radius: 22px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-lg); padding: 1.1rem; transform: perspective(1400px) rotateY(-6deg) rotateX(3deg); }
+.preview-top { display: flex; gap: .35rem; margin-bottom: .9rem; }
+.preview-top i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-2); }
+.preview-top i:first-child { background: #fb7185; } .preview-top i:nth-child(2) { background: #fbbf24; } .preview-top i:nth-child(3) { background: #34d399; }
+.preview svg { width: 100%; height: auto; display: block; }
+.features { max-width: 1160px; margin: 0 auto; padding: 1rem 16px 4rem; }
+.feature { padding: 1.35rem; }
+.feature .kpi-icon { margin-bottom: .9rem; }
+.feature p { color: var(--muted); margin: 0; font-size: .92rem; }
+.auth-wrap { max-width: 440px; margin: 2.5rem auto; padding: 0 16px; width: 100%; }
+.auth-wrap h1 { text-align: center; }
+.auth-wrap .sub { text-align: center; color: var(--muted); margin-bottom: 1.25rem; }
+.auth-wrap > p { margin-top: .9rem; text-align: center; }
+.mock-banner { position: sticky; top: 0; z-index: 50; background: repeating-linear-gradient(135deg, #fde68a 0 14px, #fcd34d 14px 28px); color: #422006; text-align: center; font-size: .8rem; padding: .35rem 16px; font-weight: 600; }
+.app { min-height: calc(100vh - 30px); }
+.sidebar { top: 30px; height: calc(100vh - 30px); }
+.topbar { top: 30px; }
+.pbar { height: 8px; border-radius: 99px; background: var(--surface-3); overflow: hidden; min-width: 80px; }
+.pbar span { display: block; height: 100%; border-radius: inherit; }
+.qrow { display: flex; gap: .8rem; padding: .6rem 0; border-bottom: 1px solid var(--line); font-size: .88rem; }
+.qrow:last-child { border-bottom: 0; }
+.qn { width: 26px; height: 26px; border-radius: 8px; background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; font-size: .75rem; font-weight: 800; flex: none; }
+.chart { width: 100%; height: auto; display: block; }
+.chart .grid { stroke: var(--line); stroke-width: 1; }
+.chart .axis { fill: var(--muted); font-size: 11px; }
+.legend { display: flex; flex-wrap: wrap; gap: .4rem 1rem; margin-top: .6rem; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: .35rem; }
+.legend i { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+.stacked { display: flex; height: 34px; border-radius: 10px; overflow: hidden; gap: 2px; }
+.stacked span { display: grid; place-items: center; color: #fff; font-size: .78rem; font-weight: 700; }
+.quote { margin: 0 0 .8rem; padding: .7rem 1rem; border-left: 3px solid var(--brand-2); background: var(--surface-2); border-radius: 0 10px 10px 0; font-style: italic; }
+.quote cite { display: block; font-style: normal; font-size: .75rem; color: var(--muted); margin-top: .3rem; }
+.tilemap { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-template-rows: repeat(5, 64px); gap: 5px; }
+.tile { border-radius: 10px; display: grid; place-content: center; text-align: center; color: #fff; font-size: .72rem; line-height: 1.2; box-shadow: inset 0 0 0 1px rgba(255,255,255,.25); }
+.tile b { font-size: .8rem; } .tile span { opacity: .9; }
+.tile.sup { background: repeating-linear-gradient(45deg, #cbd5e1 0 4px, #f1f5f9 4px 8px); color: #475569; }
+.agents { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: .6rem; }
+.agent { border: 1px solid var(--line); border-radius: 12px; padding: .65rem .75rem; background: var(--surface-2); font-size: .82rem; }
+.agent .dots { display: flex; gap: .35rem; margin-top: .45rem; }
+.agent .dots i { width: 22px; height: 8px; border-radius: 99px; background: var(--line-2); }
+.agent .dots i.on { background: var(--ok); } .agent .dots i.wait { background: var(--c-amber); }
+.chatbox { display: grid; gap: 1rem; max-width: 880px; }
+.msg { padding: .9rem 1.1rem; border-radius: 16px; font-size: .92rem; max-width: 88%; }
+.msg p { margin: 0 0 .55rem; } .msg sup { color: var(--brand); font-weight: 700; }
+.msg.me { justify-self: end; background: var(--grad); color: #fff; border-bottom-right-radius: 4px; }
+.msg.ai { background: var(--surface-2); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+.cites { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
+.cites span { font-size: .74rem; padding: .2rem .55rem; border-radius: 8px; background: var(--brand-soft); color: var(--brand); }
+.composer { display: flex; gap: .5rem; }
+@media (max-width: 960px) { .sidebar { display: none; } .tilemap { grid-template-rows: repeat(5, 48px); } .tile { font-size: .6rem; } .tile span { display: none; } }
+</style></head><body><div class="mock-banner">MAQUETA · todos los datos de esta página son <strong>ficticios</strong> y sirven solo para mostrar el diseño previsto de cada módulo.</div>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="#inicio"><span class="brand-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 19V11M10 19V6M15 19v-5M20 19V9"/><path d="M4 7.5 10 4l5 6 5-3.5" stroke-width="1.6" opacity=".75"/></svg></span><span>ISTEM RESEARCH<small>Inteligencia · Investigación · Opinión</small></span></a>
+    <nav id="nav" aria-label="Menú"></nav>
+    <div class="side-foot"><strong>Visión completa</strong>Las 7 fases terminadas<div class="bar"><span style="width:100%"></span></div></div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left"><details class="nav-mobile"><summary aria-label="Menú">☰</summary><div class="mobile-panel"><nav id="nav-m" style="color:var(--side-text)"></nav></div></details>
+        <label class="org-switch"><span class="org-dot">ID</span><select><option>Instituto Demo (datos ficticios)</option></select></label></div>
+      <div class="topbar-right"><div class="user-chip"><span class="avatar">MM</span><span class="who"><strong>Martin Mateo</strong><small>Director de investigación</small></span></div></div>
+    </header>
+    <main class="content" id="view"></main>
+  </div>
+</div>
+<script>const ICONS = {"home": "M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z", "flask": "M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3M7.5 15h9", "clipboard": "M9 4h6a1 1 0 0 1 1 1v1H8V5a1 1 0 0 1 1-1zM8 5H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2M9 12l2 2 4-4M9 17h6", "users": "M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM20 20v-1.5a3.5 3.5 0 0 0-2.5-3.35M15.5 4.2a3.5 3.5 0 0 1 0 6.6", "pin": "M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21zM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z", "chat": "M20 12a8 8 0 0 1-11.8 7L4 20l1-4.2A8 8 0 1 1 20 12zM8.5 12h.01M12 12h.01M15.5 12h.01", "globe": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18", "bars": "M4 20h16M7 16V10M12 16V5M17 16v-4", "sigma": "M18 5H6l6 7-6 7h12", "map": "M9 4 3 6.5v13.5L9 17.5l6 2.5 6-2.5V4l-6 2.5zM9 4v13.5M15 6.5V20", "layers": "M12 3 2.5 8 12 13l9.5-5zM2.5 12 12 17l9.5-5M2.5 16 12 21l9.5-5", "cpu": "M7 7h10v10H7zM10 10h4v4h-4zM9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4", "spark": "M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z", "file": "M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6", "send": "M21 3 10 14M21 3l-7 18-4-7-7-4z", "plug": "M9 2v5M15 2v5M6 7h12v4a6 6 0 0 1-12 0zM12 17v5", "shield": "M12 3 4.5 6v6c0 4.6 3.2 7.9 7.5 9 4.3-1.1 7.5-4.4 7.5-9V6zM9 12l2 2 4-4", "gear": "M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z", "activity": "M3 12h4l3-8 4 16 3-8h4", "check": "M20 6 9 17l-5-5", "lock": "M6 11h12v10H6zM8 11V8a4 4 0 0 1 8 0v3", "plus": "M12 5v14M5 12h14", "arrow": "M5 12h14M13 6l6 6-6 6", "clock": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2", "logout": "M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H3", "menu": "M4 6h16M4 12h16M4 18h16", "target": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z", "fingerprint": "M12 11v3c0 2-.5 4-1.5 6M8 7.5A5 5 0 0 1 17 10v2c0 2.5-.4 4.5-1 6M5 15c.6-1.6 1-3.2 1-5a6 6 0 0 1 1-3.3M20 9.5c.3 1 .4 2 .4 2.5 0 1.5-.2 3-.5 4.5M14 13c0 3-1 6-2.5 8"};
+// Maqueta navegable de ISTEM RESEARCH. Datos 100 % ficticios.
+const I = (n, s = 18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICONS[n] || ICONS.spark}"/></svg>`;
+const fmt = (n, d = 0) => n.toLocaleString("es-DO", { maximumFractionDigits: d, minimumFractionDigits: d });
+
+const MODS = [
+  ["inicio", "Inicio", "home", "General"], ["proyectos", "Centro de investigaciones", "flask", "General"],
+  ["encuestas", "Encuestas", "clipboard", "Demoscopia"], ["muestras", "Participantes y muestras", "users", "Demoscopia"], ["campo", "Trabajo de campo", "pin", "Demoscopia"],
+  ["redes", "Inteligencia de redes", "chat", "Inteligencia"], ["web", "Investigación web", "globe", "Inteligencia"], ["pop", "Encuesta de encuestas", "bars", "Inteligencia"],
+  ["estadistica", "Análisis estadístico", "sigma", "Análisis"], ["geo", "Inteligencia geográfica", "map", "Análisis"], ["evidencias", "Laboratorio de evidencias", "layers", "Análisis"],
+  ["agentes", "Agentes de IA", "cpu", "Inteligencia artificial"], ["chat", "Chat de investigación", "spark", "Inteligencia artificial"],
+  ["informes", "Informes", "file", "Resultados"], ["publicaciones", "Publicaciones", "send", "Resultados"],
+  ["fuentes", "Fuentes y conectores", "plug", "Plataforma"], ["administracion", "Administración", "shield", "Plataforma"], ["configuracion", "Configuración", "gear", "Plataforma"],
+];
+
+function navHtml(active) {
+  const groups = [...new Set(MODS.map((m) => m[3]))];
+  return groups.map((g) => `<div class="nav-group"><div class="nav-group-title">${g}</div><ul class="nav">${MODS.filter((m) => m[3] === g)
+    .map(([k, l, ic]) => `<li><a href="#${k}" ${k === active ? 'aria-current="page"' : ""}>${I(ic)}<span class="label">${l}</span></a></li>`).join("")}</ul></div>`).join("");
+}
+
+const head = (eyebrow, icon, title, desc, actions = "") => `<div class="page-head"><div><div class="eyebrow">${I(icon, 14)} ${eyebrow}</div><h1>${title}</h1><div class="muted" style="max-width:72ch">${desc}</div></div>${actions ? `<div class="form-actions">${actions}</div>` : ""}</div>`;
+const card = (icon, title, body, extra = "") => `<section class="card"><div class="card-head"><h2><span class="card-title-icon">${I(icon, 16)}</span>${title}</h2>${extra}</div>${body}</section>`;
+const kpi = (label, value, note, icon, tone) => `<div class="kpi tone-${tone}"><div class="kpi-top"><span class="label">${label}</span><span class="kpi-icon">${I(icon, 20)}</span></div><div class="value">${value}</div><div class="note">${note}</div></div>`;
+const badge = (t, tone = "neutral", dot = true) => `<span class="badge ${dot ? "dot " : ""}${tone}">${t}</span>`;
+const bar = (pct, color = "var(--grad)") => `<div class="pbar"><span style="width:${pct}%;background:${color}"></span></div>`;
+const table = (cols, rows, numCols = []) => `<div class="table-wrap"><table><thead><tr>${cols.map((c, i) => `<th${numCols.includes(i) ? ' class="num"' : ""}>${c}</th>`).join("")}</tr></thead><tbody>${rows.map((r) => `<tr>${r.map((c, i) => `<td${numCols.includes(i) ? ' class="num"' : ""}>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+const alert = (level, title, text) => `<div class="alert ${level}"><strong>${title}</strong>${text}</div>`;
+
+function lineChart({ series, w = 640, h = 240, yMin, yMax, band, labels }) {
+  const px = (x) => 40 + (x / (labels.length - 1)) * (w - 60);
+  const py = (y) => h - 28 - ((y - yMin) / (yMax - yMin)) * (h - 50);
+  let svg = `<svg viewBox="0 0 ${w} ${h}" class="chart" role="img">`;
+  for (let t = yMin; t <= yMax; t += (yMax - yMin) / 4) svg += `<line x1="40" x2="${w - 20}" y1="${py(t)}" y2="${py(t)}" class="grid"/><text x="32" y="${py(t) + 4}" class="axis" text-anchor="end">${Math.round(t)}%</text>`;
+  labels.forEach((l, i) => { if (i % 2 === 0) svg += `<text x="${px(i)}" y="${h - 8}" class="axis" text-anchor="middle">${l}</text>`; });
+  if (band) svg += `<path d="${band.hi.map((y, i) => `${i ? "L" : "M"}${px(i)},${py(y)}`).join("")}${band.lo.map((y, i) => `L${px(band.lo.length - 1 - i)},${py(band.lo[band.lo.length - 1 - i])}`).join("")}Z" fill="${band.color}" opacity=".15"/>`;
+  series.forEach((s) => {
+    if (s.points) s.points.forEach(([x, y]) => (svg += `<circle cx="${px(x)}" cy="${py(y)}" r="4" fill="${s.color}" opacity=".85"/>`));
+    if (s.line) svg += `<path d="${s.line.map((y, i) => `${i ? "L" : "M"}${px(i)},${py(y)}`).join("")}" fill="none" stroke="${s.color}" stroke-width="${s.width || 2.5}" stroke-linecap="round" stroke-linejoin="round" ${s.dash ? 'stroke-dasharray="5 5"' : ""}/>`;
+  });
+  return svg + "</svg>";
+}
+const legend = (items) => `<div class="legend">${items.map(([c, t]) => `<span><i style="background:${c}"></i>${t}</span>`).join("")}</div>`;
+const stacked = (parts) => `<div class="stacked">${parts.map(([pct, color, label]) => `<span style="width:${pct}%;background:${color}" title="${label} ${pct}%">${pct >= 8 ? `${pct}%` : ""}</span>`).join("")}</div>`;
+
+const PROVS = [["MC", "Monte Cristi", 0, 0], ["VA", "Valverde", 1, 0], ["PP", "Puerto Plata", 2, 0], ["ES", "Espaillat", 3, 0], ["MT", "María T. Sánchez", 4, 0], ["SA", "Samaná", 5, 0],
+  ["DA", "Dajabón", 0, 1], ["SR", "Santiago Rodríguez", 1, 1], ["ST", "Santiago", 2, 1], ["HM", "Hermanas Mirabal", 3, 1], ["DU", "Duarte", 4, 1], ["HA", "Hato Mayor", 5, 1],
+  ["EP", "Elías Piña", 0, 2], ["SJ", "San Juan", 1, 2], ["LV", "La Vega", 2, 2], ["SN", "Sánchez Ramírez", 3, 2], ["MP", "Monte Plata", 4, 2], ["ESe", "El Seibo", 5, 2], ["LA", "La Altagracia", 6, 2],
+  ["IN", "Independencia", 0, 3], ["BH", "Bahoruco", 1, 3], ["AZ", "Azua", 2, 3], ["MN", "Monseñor Nouel", 3, 3], ["SD", "Santo Domingo", 4, 3], ["SP", "San Pedro de Macorís", 5, 3], ["LR", "La Romana", 6, 3],
+  ["PE", "Pedernales", 0, 4], ["BA", "Barahona", 1, 4], ["OC", "San José de Ocoa", 2, 4], ["PV", "Peravia", 3, 4], ["SC", "San Cristóbal", 4, 4], ["DN", "Distrito Nacional", 5, 4]];
+const pseudo = (s) => { let h = 7; for (const c of s) h = (h * 31 + c.charCodeAt(0)) % 997; return h / 997; };
+
+const VIEWS = {
+  inicio: () => `<section class="hero-band"><div class="hero-row"><div><div class="eyebrow">${I("spark", 14)} Instituto Demo (datos ficticios)</div><h1>Buenas tardes, Martin</h1><p>Tienes 4 investigaciones activas, 2 informes esperando aprobación y 1 alerta de calidad.</p>
+    <div class="hero-chips"><span>${I("clock", 13)} Sábado, 21 de noviembre</span><span>${I("shield", 13)} Auditoría íntegra</span><span>${I("cpu", 13)} 7 agentes trabajando</span></div></div>
+    <div class="form-actions"><a class="btn" href="#chat">${I("spark", 16)} Preguntar a ISTEM AI</a><a class="btn primary" href="#proyectos">${I("plus", 16)} Nuevo proyecto</a></div></div></section>
+    <div class="grid cols-4">${kpi("Investigaciones activas", "4", "+1 esta semana", "activity", "blue")}${kpi("Entrevistas recibidas", "3.482", "Meta 4.200 · 83 %", "clipboard", "teal")}${kpi("Calidad de respuestas", "96,1 %", "41 casos en revisión", "check", "violet")}${kpi("Costo del mes", "US$ 312", "Presupuesto US$ 500", "bars", "amber")}</div>
+    <div class="grid cols-4" style="margin-top:1.1rem">${kpi("Fuentes conectadas", "4", "2 pendientes de autorización", "plug", "blue")}${kpi("Documentos procesados", "12.840", "Últimos 30 días", "file", "teal")}${kpi("Informes pendientes", "2", "Esperan tu aprobación", "send", "rose")}${kpi("Agentes activos", "7", "de 36 · 0 bloqueados", "cpu", "violet")}</div>
+    <div class="grid wide-left" style="margin-top:1.5rem">${card("activity", "Entrevistas por día", lineChart({ labels: ["10 nov", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"], yMin: 0, yMax: 100, series: [{ color: "#2563eb", line: [12, 28, 41, 38, 52, 60, 48, 71, 76, 69, 82, 88] }, { color: "#0ea5a4", line: [8, 20, 30, 33, 41, 50, 44, 58, 64, 61, 70, 74], dash: true }] }).replace(/%<\/text>/g, "</text>") + legend([["#2563eb", "Recibidas"], ["#0ea5a4", "Validadas"]]))}
+    ${card("spark", "Alertas", alert("advertencia", "Calidad · Santiago", "12 entrevistas con duración < 4 min del encuestador E-14. Revisión sugerida (probabilística, no concluyente).") + alert("info", "Fuente", "La cuota mensual de la API de YouTube va al 78 %.") + alert("success", "Informe", "«Confianza en las instituciones 2025» fue aprobado y publicado."))}</div>`,
+
+  proyectos: () => head("Centro de investigaciones", "flask", "Proyectos", "Ya disponible en la app real. Así se ve con varios proyectos en curso.", `<a class="btn primary">${I("plus", 16)} Nuevo proyecto</a>`) +
+    card("flask", "7 proyectos", table(["Proyecto", "Objetivo", "Diseño", "Muestra", "Avance", "Estado"], [
+      ["<b>Satisfacción con servicios municipales</b><div class='small muted mono'>IR-2026-0001</div>", "Descriptivo", "Probabilístico", "1.601", bar(64), badge("Trabajo de campo", "brand")],
+      ["<b>Percepción de seguridad ciudadana</b><div class='small muted mono'>IR-2026-0002</div>", "Comparativo", "Probabilístico", "1.200", bar(78), badge("Análisis", "teal")],
+      ["<b>Conversación pública sobre transporte</b><div class='small muted mono'>IR-2026-0003</div>", "Exploratorio", "No aplica", "—", bar(30), badge("Diseño", "violet")],
+      ["<b>Calidad del agua potable</b><div class='small muted mono'>IR-2026-0006</div>", "Evaluativo", "Probabilístico", "1.000", bar(90), badge("Revisión", "warn")],
+      ["<b>Confianza en las instituciones 2025</b><div class='small muted mono'>IR-2026-0005</div>", "Seguimiento", "Probabilístico", "2.400", bar(100, "var(--ok)"), badge("Terminado", "ok")],
+    ], [3])),
+
+  encuestas: () => head("Motor A · ISTEM POLLS", "clipboard", "Encuestas", "Editor visual con versiones inmutables, lógica, cuotas y consentimiento.", `<a class="btn">${I("users", 16)} Vista previa móvil</a><a class="btn primary">${I("send", 16)} Publicar versión</a>`) +
+    `<div class="grid wide-left">${card("clipboard", "Cuestionario · Satisfacción municipal", `<div class="tags" style="margin-bottom:1rem">${badge("v3 publicada · inmutable", "ok")} ${badge("v4 borrador", "violet")} ${badge("Español · Inglés", "neutral", false)} ${badge("≈ 12 min", "neutral", false)}</div>
+      ${[["Consentimiento informado", "Consentimiento", "Obligatoria", ""], ["P1. ¿Cuál es su edad?", "Numérica", "Cuota: edad", ""], ["P2. En general, ¿qué tan satisfecho está con la recogida de basura?", "Likert 1–5", "Aleatorizar opciones", ""], ["P3. ¿Cuál de estos servicios debería mejorar primero?", "Ordenamiento", "", "Si P2 ≤ 2 → P4"], ["P4. ¿Por qué está insatisfecho?", "Abierta", "Codificación asistida", ""], ["P5. Califique estos servicios", "Matriz", "6 ítems", ""], ["P6. Elija el paquete de mejoras preferido", "MaxDiff", "8 atributos", ""]]
+        .map(([q, t, n, l], i) => `<div class="qrow"><span class="qn">${i}</span><div style="flex:1"><div style="font-weight:600">${q}</div><div class="tags" style="margin-top:.3rem">${badge(t, "brand", false)}${n ? badge(n, "neutral", false) : ""}${l ? badge("↳ " + l, "warn", false) : ""}</div></div></div>`).join("")}`)}
+      <div class="stack">${card("spark", "Revisión asistida", alert("advertencia", "P3 posiblemente tendenciosa", "«debería mejorar primero» presupone que algún servicio necesita mejora. Sugerencia: añadir «Ninguno».") + alert("info", "Tiempo estimado", "11,8 minutos según 32 entrevistas piloto."))}
+      ${card("layers", "Encuestas de la organización", table(["Encuesta", "Estado"], [["Satisfacción municipal", badge("En campo", "brand")], ["Seguridad ciudadana", badge("Cerrada", "ok")], ["Agua potable", badge("Cerrada", "ok")], ["Clima laboral", badge("Borrador", "neutral")]]))}</div></div>`,
+
+  muestras: () => head("Participantes y muestras", "users", "Cuotas y ponderación", "Avance de cuotas en tiempo real y diagnóstico de la ponderación por raking.") +
+    `<div class="grid cols-2">${card("users", "Cuotas · Satisfacción municipal", [["Mujeres", 512, 816], ["Hombres", 517, 785], ["18–29", 248, 432], ["30–44", 301, 448], ["45–59", 276, 416], ["60+", 204, 305], ["Urbano", 778, 1185], ["Rural", 251, 416]]
+      .map(([l, a, b]) => `<div class="qrow" style="align-items:center"><div style="width:90px">${l}</div><div style="flex:1">${bar(Math.round((a / b) * 100))}</div><div class="small mono" style="width:90px;text-align:right">${fmt(a)} / ${fmt(b)}</div></div>`).join(""))}
+      ${card("sigma", "Diagnóstico de ponderación", `<dl class="dl"><dt>Método</dt><dd>Raking (sexo × edad × zona × región)</dd><dt>Iteraciones</dt><dd>7 · convergió (desv. máx. 3·10⁻⁷)</dd><dt>Efecto de diseño</dt><dd>1,42</dd><dt>n nominal → efectivo</dt><dd>1.029 → 725</dd><dt>Peso mín. / máx.</dt><dd>0,41 / 3,10 (recortado a 3,5)</dd><dt>Margen estimado</dt><dd>±3,6 puntos al 95 %</dd></dl>` + alert("info", "Fuente de los márgenes", "Proyecciones de población de la ONE (verificación pendiente)."))}</div>`,
+
+  campo: () => head("Trabajo de campo", "pin", "Campo en vivo", "PWA sin conexión para encuestadores, sincronización con control de conflictos y supervisión de calidad.") +
+    `<div class="grid cols-4">${kpi("Completas", "1.029", "de 1.601 · 64 %", "check", "teal")}${kpi("En curso hoy", "38", "12 encuestadores activos", "pin", "blue")}${kpi("Pendientes de sincronizar", "14", "3 dispositivos sin señal", "clock", "amber")}${kpi("Rechazadas", "23", "2,2 % · revisables", "shield", "rose")}</div>
+    <div class="grid wide-left" style="margin-top:1.1rem">${card("map", "Avance por provincia", [["Distrito Nacional", 312, 420], ["Santo Domingo", 388, 610], ["Santiago", 241, 380], ["La Vega", 88, 191]].map(([p, a, b]) => `<div class="qrow" style="align-items:center"><div style="width:150px">${p}</div><div style="flex:1">${bar(Math.round((a / b) * 100))}</div><div class="small mono" style="width:80px;text-align:right">${a}/${b}</div></div>`).join(""))}
+    ${card("users", "Encuestadores", table(["Código", "Hoy", "Calidad"], [["E-03", "9", badge("98 %", "ok")], ["E-07", "8", badge("97 %", "ok")], ["E-11", "7", badge("95 %", "ok")], ["E-14", "11", badge("Revisar", "warn")]], [1]))}</div>`,
+
+  redes: () => head("Motor B · SOCIAL INTELLIGENCE", "chat", "Conversación sobre transporte urbano", "Análisis agregado de contenido público obtenido por APIs oficiales autorizadas.") +
+    alert("advertencia", "Esto no es opinión pública", "Las conversaciones digitales no son una muestra aleatoria: una persona puede comentar muchas veces y puede haber cuentas automatizadas. Se reporta participación digital, no la opinión de la población.") +
+    `<div class="grid cols-4" style="margin-top:1rem">${kpi("Comentarios", "18.420", "YouTube, Reddit, Bluesky", "chat", "blue")}${kpi("Autores observables", "6.112", "3,0 comentarios por autor", "users", "violet")}${kpi("Publicaciones", "312", "Últimos 30 días", "file", "teal")}${kpi("Posible automatización", "4,8 %", "Probabilístico, revisable", "cpu", "rose")}</div>
+    <div class="grid cols-2" style="margin-top:1.1rem">${card("activity", "Tono del contenido", stacked([[22, "var(--ok)", "Positivo"], [41, "#94a3b8", "Neutral"], [29, "var(--bad)", "Negativo"], [8, "var(--c-amber)", "Mixto"]]) + legend([["var(--ok)", "Positivo"], ["#94a3b8", "Neutral"], ["var(--bad)", "Negativo"], ["var(--c-amber)", "Mixto"]]) + `<p class="small muted" style="margin-top:.8rem">Modelo de sentimiento para español dominicano · precisión validada 0,84 en 1.200 comentarios etiquetados.</p>`)}
+    ${card("layers", "Temas principales", [["Tiempos de espera", 31], ["Tarifas", 24], ["Seguridad en paradas", 18], ["Nuevas rutas", 14], ["Accesibilidad", 8]].map(([t, v]) => `<div class="qrow" style="align-items:center"><div style="width:170px">${t}</div><div style="flex:1">${bar(v * 3)}</div><div class="small mono" style="width:40px;text-align:right">${v}%</div></div>`).join(""))}</div>
+    ${card("spark", "Citas representativas (anonimizadas)", `<blockquote class="quote">«Uno dura más esperando la guagua que en el viaje.»<cite>YouTube · 14 nov · tema: tiempos de espera</cite></blockquote><blockquote class="quote">«La ruta nueva por la 27 resolvió bastante, la verdad.»<cite>Reddit · 16 nov · tema: nuevas rutas</cite></blockquote>`)}`,
+
+  web: () => head("Motor C · WEB INTELLIGENCE", "globe", "Investigación web y documental", "Rastreo autorizado, documentos y RSS con procedencia verificable.") +
+    `<div class="grid wide-left">${card("globe", "Documentos recientes", table(["Documento", "Fuente", "Tipo", "Estado"], [["Informe de ejecución presupuestaria T3", "Portal de transparencia", "PDF · 84 págs.", badge("Indexado", "ok")], ["Nota: nuevas rutas de transporte", "Medio digital (RSS)", "HTML", badge("Indexado", "ok")], ["Datos abiertos: tarifas 2026", "Datos abiertos", "CSV", badge("Tablas extraídas", "teal")], ["Estudio académico de movilidad", "Repositorio abierto", "PDF", badge("OCR en curso", "warn")]]))}
+    ${card("shield", "Cumplimiento del rastreador", `<dl class="dl"><dt>Dominios autorizados</dt><dd>38</dd><dt>robots.txt respetado</dt><dd>100 %</dd><dt>Solicitudes hoy</dt><dd>4.210 (límite 10.000)</dd><dt>Bloqueados por términos</dt><dd>3 dominios</dd></dl>`)}</div>`,
+
+  pop: () => {
+    const labels = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+    return head("Motor D · POLL OF POLLS", "bars", "Encuesta de encuestas", "Estudios publicados homologados por fecha de campo, con agregación e incertidumbre.") +
+      alert("info", "Cómo leer esto", "Agregación estadística de encuestas publicadas (ficticias en esta maqueta). No es un resultado oficial ni un pronóstico cierto.") +
+      `<div class="grid wide-left" style="margin-top:1rem">${card("activity", "Aprobación de la gestión municipal · % que aprueba", lineChart({ labels, yMin: 30, yMax: 70, band: { color: "#2563eb", hi: [55, 56, 56, 57, 58, 58, 57, 56, 55, 55, 56, 57], lo: [47, 48, 48, 49, 50, 50, 49, 48, 47, 47, 48, 49] },
+        series: [{ color: "#2563eb", line: [51, 52, 52, 53, 54, 54, 53, 52, 51, 51, 52, 53], width: 3.5 }, { color: "#0ea5a4", points: [[0, 49], [3, 55], [6, 54], [9, 50]] }, { color: "#7c3aed", points: [[1, 54], [4, 56], [7, 51], [10, 54]] }, { color: "#d97706", points: [[2, 47], [5, 52], [8, 49], [11, 51]] }] })
+        + legend([["#2563eb", "Agregado (modelo bayesiano) ± 90 %"], ["#0ea5a4", "Encuestadora A"], ["#7c3aed", "Encuestadora B"], ["#d97706", "Encuestadora C"]]))}
+      ${card("shield", "Índice de transparencia", table(["Estudio", "Campo", "n", "Índice"], [["Encuestadora A", "1–5 oct", "1.200", badge("92", "ok")], ["Encuestadora B", "8–12 nov", "1.000", badge("85", "ok")], ["Encuestadora C", "2–6 sep", "800", badge("61", "warn")], ["Nota de prensa D", "—", "—", badge("Excluida: sin ficha", "bad")]], [2]) + `<p class="small muted" style="margin-top:.6rem">El índice mide transparencia metodológica, no exactitud.</p>`)}</div>`;
+  },
+
+  estadistica: () => head("Motor E · ANALYTICS", "sigma", "Laboratorio estadístico", "Modelos versionados con conjuntos de evaluación, métricas y responsables.") +
+    `<div class="grid cols-3">${kpi("Modelos registrados", "14", "3 en producción", "sigma", "blue")}${kpi("Corridas este mes", "86", "Reproducibles con semilla", "activity", "teal")}${kpi("Calibración de intervalos", "91 %", "Cobertura nominal 90 %", "check", "violet")}</div>
+    <div style="margin-top:1.1rem">${card("layers", "Registro de modelos", table(["Modelo", "Tipo", "Versión", "Validación", "Responsable", "Estado"], [["Aprobación municipal (MRP)", "Multinivel + posestratificación", "v2.3", "Validación cruzada 5 pliegues", "C. Díaz (ficticia)", badge("Producción", "ok")], ["Sentimiento es-DO", "Clasificador NLP", "v1.8", "F1 0,84", "L. Gómez (ficticio)", badge("Producción", "ok")], ["Agregador de encuestas", "Bayesiano jerárquico", "v1.1", "Error histórico 2,1 pts", "C. Díaz (ficticia)", badge("Producción", "ok")], ["Propensión panel web", "Regresión logística", "v0.4", "En curso", "P. Ruiz (ficticio)", badge("Experimental", "warn")]]))}</div>`,
+
+  geo: () => head("ISTEM GEO", "map", "Satisfacción por provincia", "Estimación de áreas pequeñas (MRP). Celdas con pocos casos se suprimen para proteger la identidad.") +
+    `<div class="grid wide-left">${card("map", "Mapa de mosaico · % satisfecho", `<div class="tilemap">${PROVS.map(([c, n, x, y]) => { const v = 35 + Math.round(pseudo(n) * 35); const sup = ["PE", "EP", "IN"].includes(c); return `<div class="tile${sup ? " sup" : ""}" style="grid-column:${x + 1};grid-row:${y + 1};${sup ? "" : `background:color-mix(in srgb,#1d4ed8 ${Math.round((v - 30) * 2.2)}%, #e8efff);${v < 52 ? "color:#0c1830" : ""}`}" title="${n}: ${sup ? "suprimido (n < 30)" : v + " %"}"><b>${c}</b><span>${sup ? "n<30" : v + "%"}</span></div>`; }).join("")}</div>`
+      + legend([["#e8efff", "35 %"], ["#5b86e5", "52 %"], ["#1d4ed8", "70 %"], ["repeating-linear-gradient(45deg,#cbd5e1 0 4px,#f1f5f9 4px 8px)", "Suprimido"]]) + `<p class="small muted">Mosaico esquemático; la versión final usará MapLibre + PostGIS con la cartografía oficial.</p>`)}
+    ${card("shield", "Calidad de la estimación", `<dl class="dl"><dt>Modelo</dt><dd>MRP v2.3</dd><dt>Provincias publicables</dt><dd>29 de 32</dd><dt>Suprimidas</dt><dd>Pedernales, Elías Piña, Independencia</dd><dt>Umbral</dt><dd>n ≥ 30 casos</dd></dl>`)}</div>`,
+
+  evidencias: () => head("Research Data Fusion", "layers", "Laboratorio de evidencias", "¿Por qué las fuentes dicen cosas distintas? Cada una con su propio método, cobertura e incertidumbre.") +
+    `<div class="grid cols-3">${[["clipboard", "teal", "Encuesta propia", "52 %", "satisface el transporte", "Probabilística · n 1.200 · ±3,4 pts"], ["bars", "violet", "Encuestas externas", "49 %", "promedio agregado", "3 estudios · banda 45–53 %"], ["chat", "rose", "Conversación digital", "29 %", "del contenido es negativo", "18.420 comentarios · no representativo"]].map(([ic, t, s, v, d, m]) => `<div class="kpi tone-${t}"><div class="kpi-top"><span class="label">${s}</span><span class="kpi-icon">${I(ic, 20)}</span></div><div class="value">${v}</div><div class="note">${d}</div><div class="small" style="margin-top:.6rem;color:var(--text-2)">${m}</div></div>`).join("")}</div>
+    <div style="margin-top:1.1rem">${card("spark", "Interpretación (borrador del agente de síntesis, pendiente de revisión humana)", alert("info", "Evidencia observada", "La encuesta propia y las externas coinciden dentro de su incertidumbre (52 % vs. 45–53 %).") + alert("advertencia", "Inferencia del modelo", "La negatividad digital se concentra en tiempos de espera; puede reflejar a usuarios frecuentes más que a la población.") + alert("info", "Hipótesis a verificar", "La caída de agosto coincide con el cambio de tarifas (fuente: nota de prensa, 3 ago). Correlación, no causalidad."))}</div>`,
+
+  agentes: () => head("Motor F · AGENTIC HARNESS", "cpu", "Agentes de IA", "36 agentes en 12 familias, con presupuesto, permisos, aprobación humana y parada inmediata.", `<a class="btn danger">${I("lock", 16)} Detener todos</a>`) +
+    `<div class="grid cols-4">${kpi("Activos", "7", "de 36", "cpu", "blue")}${kpi("Esperan aprobación", "2", "Acciones sensibles", "shield", "amber")}${kpi("Gasto del mes", "US$ 41", "Presupuesto US$ 120", "bars", "teal")}${kpi("Exactitud de citas", "98,4 %", "Evaluación automática", "check", "violet")}</div>
+    <div class="grid wide-left" style="margin-top:1.1rem">${card("layers", "Familias", `<div class="agents">${["Planificación", "Investigación documental", "Recolección", "Redes sociales", "Demoscopia", "Estadística", "Encuesta de encuestas", "Inteligencia geográfica", "Interpretación", "Informes", "Seguridad y cumplimiento", "Operaciones"].map((f, i) => `<div class="agent"><b>${f}</b><div class="dots">${[0, 1, 2].map((j) => `<i class="${(i * 3 + j) % 5 === 0 ? "on" : (i * 3 + j) % 11 === 0 ? "wait" : ""}"></i>`).join("")}</div></div>`).join("")}</div>` + legend([["var(--ok)", "Trabajando"], ["var(--c-amber)", "Esperando aprobación"], ["var(--line-2)", "En reposo"]]))}
+    ${card("shield", "Cola de aprobación", alert("advertencia", "Agente de rastreo web", "Solicita añadir el dominio de un medio nuevo a la lista autorizada. Términos de uso revisados por el agente de licencias.") + `<div class="form-actions"><a class="btn small primary">Aprobar</a><a class="btn small">Rechazar</a></div>` + alert("advertencia", "Agente redactor científico", "Solicita publicar el borrador del informe «Agua potable». Requiere aprobación de un director.") + `<div class="form-actions"><a class="btn small primary">Revisar</a></div>`)}</div>`,
+
+  chat: () => head("ISTEM RESEARCH AI", "spark", "Chat de investigación", "Respuestas con citas, filtros aplicados y advertencias de cobertura.") +
+    `<section class="card chatbox"><div class="msg me">Compara la encuesta de seguridad con las conversaciones digitales sobre el tema y dime qué tan robusta es la estimación.</div>
+    <div class="msg ai"><p><b>Evidencia observada.</b> En la encuesta «Percepción de seguridad ciudadana» (probabilística, n = 1.214, campo 1 sep–30 oct), el <b>38 %</b> se siente inseguro en su barrio (±3,2 pts al 95 %) <sup>[1]</sup>.</p><p><b>Conversación digital.</b> El 34 % del contenido sobre seguridad es negativo <sup>[2]</sup>, pero esa cifra describe participación digital, no a la población.</p><p><b>Robustez.</b> Con tres esquemas de ponderación alternativos la estimación va de 36 % a 40 %: es estable <sup>[3]</sup>.</p>
+    <div class="cites"><span>[1] Informe IR-2026-0002 · tabla 4</span><span>[2] Motor B · 1–30 nov · 4.120 comentarios</span><span>[3] Corrida de sensibilidad #86</span></div>
+    <div class="tags" style="margin-top:.6rem">${badge("Filtros: DO · adultos · sep–nov 2026", "neutral", false)}${badge("Cobertura: zonas urbanas", "warn", false)}</div></div>
+    <div class="composer"><input type="text" placeholder="Pregunta sobre tus investigaciones…"><a class="btn primary">${I("send", 16)}</a></div></section>`,
+
+  informes: () => head("Informes", "file", "Informes", "Generador editorial y científico; nada se publica sin aprobación humana.", `<a class="btn primary">${I("plus", 16)} Nuevo informe</a>`) +
+    card("file", "Informes de la organización", table(["Informe", "Tipo", "Formatos", "Aprobación", "Auditoría"], [["Confianza en las instituciones 2025", "Opinión pública", "PDF · DOCX · Web", badge("Aprobado", "ok"), "<span class='mono small'>a9f3…c21</span>"], ["Calidad del agua potable", "Evaluativo", "PDF · XLSX", badge("Revisión metodológica", "warn"), "<span class='mono small'>77d0…e4b</span>"], ["Transporte urbano · conversación digital", "Análisis de medios", "Web interactiva", badge("Borrador del agente", "violet"), "<span class='mono small'>—</span>"]])),
+
+  publicaciones: () => head("Motor G · RESEARCH CLOUD", "send", "Publicaciones", "Publicaciones públicas revisadas, con comprobación de la regulación vigente.") +
+    `<div class="grid cols-2">${card("send", "Publicadas", table(["Publicación", "Fecha", "Visitas"], [["Confianza en las instituciones 2025", "15 sep 2026", "4.812"], ["Metodología del índice de satisfacción", "2 oct 2026", "1.204"]], [2]))}
+    ${card("shield", "Comprobación previa · encuesta electoral", alert("bloqueo", "Bloqueado por regla vigente", "Regla JCE (ficticia en esta maqueta): no publicar encuestas electorales dentro del periodo de veda. La regla real debe validarla un abogado.") + alert("success", "Ficha técnica completa", "Patrocinador, fechas de campo, población, n, método y margen."))}</div>`,
+
+  fuentes: () => head("Fuentes y conectores", "plug", "Fuentes y conectores", "Cada fuente con su ficha de integración: API oficial, permisos, límites, retención, uso comercial y eliminación.") +
+    `<div class="grid cols-3">${[["YouTube", "API oficial", "Conectado", "ok", "Cuota 78 % · retención 30 días"], ["Reddit", "API oficial", "Conectado", "ok", "Uso comercial verificado"], ["Bluesky", "Protocolo AT", "Conectado", "ok", "Respeta preferencias de usuarios"], ["Medios (RSS)", "RSS + licencias", "Conectado", "ok", "38 dominios autorizados"], ["Facebook / Instagram", "Programa de investigación de Meta", "Pendiente de autorización", "warn", "Solicitud enviada"], ["TikTok", "API de investigación", "Restringido", "bad", "No elegible para uso comercial"]].map(([n, v, s, t, d]) => `<section class="card"><div class="card-head"><h2>${n}</h2>${badge(s, t)}</div><div class="small muted">${v}</div><p class="small" style="margin:.6rem 0 0">${d}</p></section>`).join("")}</div>`,
+
+  administracion: () => head("Plataforma", "shield", "Administración", "Ya disponible en la app real: miembros, roles, permisos y auditoría encadenada verificable.") + alert("success", "Módulo disponible", "Esta pantalla funciona hoy en la aplicación con tus datos reales."),
+  configuracion: () => head("Plataforma", "gear", "Configuración", "Ya disponible en la app real. En la fase 7 se suman MFA, planes y facturación.") + alert("success", "Módulo disponible", "Esta pantalla funciona hoy en la aplicación."),
+};
+
+function render() {
+  const key = (location.hash || "#inicio").slice(1);
+  const view = VIEWS[key] ? key : "inicio";
+  document.getElementById("view").innerHTML = VIEWS[view]();
+  document.getElementById("nav").innerHTML = navHtml(view);
+  document.getElementById("nav-m").innerHTML = navHtml(view);
+  document.querySelector(".nav-mobile")?.removeAttribute("open");
+  window.scrollTo(0, 0);
+}
+addEventListener("hashchange", render);
+render();
+</script></body></html>
